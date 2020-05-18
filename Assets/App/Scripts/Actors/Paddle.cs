@@ -3,7 +3,7 @@
 public class Paddle : MonoBehaviour {
 	public float speed = 5.0F;
 
-	private Rigidbody rigidbody;
+	private new Rigidbody rigidbody;
 	private float xAxis = 0.0F;
 
 	private void Awake() {

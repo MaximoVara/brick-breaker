@@ -32,7 +32,7 @@ public class Ball : MonoBehaviour
 
         if (xDiff < 0.1F || zDiff < 0.1F)
         {   
-            var angle = Random.Range(-1.0F, 1.5F);
+            var angle = Random.Range(-1.0F, 2.5F);
             lastVelocity = UnityEngine.Quaternion.Euler(0.0F, angle, 0.0F) * velocity;
         }
         this.rigidbody.velocity = velocity;

@@ -39,6 +39,7 @@ public class Ball : MonoBehaviour {
 			lastVelocity = Quaternion.Euler(0.0F, angle, 0.0F) * lastVelocity;
 		}
 
+		// 100% ellastic collision...
 		var reflection = Vector3.Reflect(this.lastVelocity.normalized, collision.GetContact(0).normal);
 
 		this.rigidbody.velocity = reflection * velocity.magnitude;

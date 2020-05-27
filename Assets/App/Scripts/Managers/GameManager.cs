@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour {
 
 		if(this.brickCount <= 0) {
 			Debug.Log("You Win!");
+			PlayerPrefs.SetInt("Level 1", this.score); // the current session....
+			DataManager.GameData.SetScore("Level 1", new Score(this.score, System.DateTime.Now)); // we will attempt to store long term the highest score...
+
+			var asset = Resources.Load<GameOver>("Game Over");
+			var clone = GameObject.Instantiate(asset.gameObject);
+			//var gameOver = clone.GetComponent<GameOver>();
 		}
 	}
 

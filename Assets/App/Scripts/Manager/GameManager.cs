@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
         if(this.brickCount <= 0)
         {
             Debug.Log("You Won!");
+            PlayerPrefs.SetInt("Level 1", this.score);
+            DataManager.GameData.SetScore("Level 1", new Score(this.score, System.DateTime.Now));
+            var asset = Resources.Load<GameOver>("Game Over");
+            var clone = GameObject.Instantiate(asset.gameObject);
+
         }
     }
     private void AddToScore(int amount)

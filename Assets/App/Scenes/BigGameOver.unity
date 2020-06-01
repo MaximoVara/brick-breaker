@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 1261354405}
   - component: {fileID: 1261354404}
   m_Layer: 5
-  m_Name: Score (1)
+  m_Name: Best
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 'Best: 0'
 --- !u!222 &1261354405
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 [System.Serializable]
+[DataContract]
 public class GameData : System.Object
 {
-    private Dictionary<string, Score> scores = new Dictionary<string, Score>();
+    [DataMember]
+    public Dictionary<string, Score> scores = new Dictionary<string, Score>();
+
+
     public bool SetScore(string levelName, Score score)
     {
         if(this.scores.ContainsKey(levelName) == false)

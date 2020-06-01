@@ -22,6 +22,9 @@ public abstract class Singleton<T>: MonoBehaviour where T : Singleton<T>
                         Singleton<T>.instance = go.AddComponent<T>();
                     }
                 }
+                // prevents singleton component in Unity...
+                // from being destroyed when sqitching scenes...
+                DontDestroyOnLoad(Singleton<T>.instance);
             }
             return Singleton<T>.instance;
         }

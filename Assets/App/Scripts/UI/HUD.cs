@@ -4,10 +4,14 @@ public class HUD : MonoBehaviour
 {
     public Text score;
 
-    private void Awake()
+    private void OnEnable()
     {
         GameManager.onScoreChanged += OnScoreChanged;
 
+    }
+    private void OnDisable()
+    {
+        GameManager.onScoreChanged -= OnScoreChanged;
     }
     private void OnScoreChanged(int score)
     {

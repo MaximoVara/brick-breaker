@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private int brickCount = 0;
     private void Start()
     {
+        Time.timeScale = 1.00F;
         this.bricks = Object.FindObjectsOfType<Brick>();
         for(int i = 0; i<this.bricks.Length; i++)
         {
@@ -35,17 +36,26 @@ public class GameManager : MonoBehaviour
         this.brickCount--;
         if(this.brickCount <= 0)
         {
-            Debug.Log("You Won!");
-            PlayerPrefs.SetInt("Level 1", this.score);
-            DataManager.GameData.SetScore("Level 1", new Score(this.score, System.DateTime.Now));
-            var asset = Resources.Load<GameOver>("Game Over");
-            var clone = GameObject.Instantiate(asset.gameObject);
-
+            OnGameOver();
         }
+    }
+    private void OnGameOver()
+    {
+        Debug.Log("You Won!");
+        PlayerPrefs.SetInt("Level 1", this.score);
+        DataManager.GameData.SetScore("Level 1", new Score(this.score, System.DateTime.Now));
+        DataManager.SaveGameData();
+
+        var asset = Resources.Load<GameOver>("GameOver");
+        GameObject.Instantiate(asset.gameObject);
+
+        Time.timeScale = 0.001F;
+
     }
     private void AddToScore(int amount)
     {
         this.score += amount;
         GameManager.onScoreChanged?.Invoke(this.score);
     }
+    
 }

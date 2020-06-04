@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
-[System.Serializable]
+[System.Serializable] // class decorator. (Attribute) class attribute.
+[DataContract]
 public class GameData : System.Object {
+	[DataMember]
 	private Dictionary<string, Score> scores = new Dictionary<string, Score>();
 
 	/// <summary>

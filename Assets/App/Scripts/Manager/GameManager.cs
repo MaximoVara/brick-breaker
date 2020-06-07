@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
         this.brickCount = this.bricks.Length;
         GameManager.onScoreChanged?.Invoke(this.score = 0);
     }
-
+    private void OnDestroy()
+    {
+        Time.timeScale = 1.0F;
+    }
     private void OnBrickHit(Brick brick)
     {
         this.AddToScore(1);

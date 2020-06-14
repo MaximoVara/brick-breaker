@@ -1,2 +1,2 @@
 # BrickBreak
-Unity Projects
+A Complete Brick-Breaking game made using Unity 2019.

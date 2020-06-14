@@ -4,7 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 
-public class DataManager : Singleton<DataManager>
+public class DataManager : MonoSingleton<DataManager>
 {
     private GameData gameData = null;
     public static GameData GameData
@@ -15,7 +15,8 @@ public class DataManager : Singleton<DataManager>
             if(DataManager.Instance.gameData == null)
             {
                 //DataManager.Instance.gameData = new GameData();
-                LoadGameData();
+                DataManager.LoadGameData();
+                DataManager.Instance.gameData.Validate();
             }
             return DataManager.Instance.gameData;
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 //  This forces the music player component to also have attached to it 
 // an AudioSource component by deafault.
 [RequireComponent(typeof(AudioSource))]
-public class MusicPlayer : Singleton<MusicPlayer>
+public class MusicPlayer : MonoSingleton<MusicPlayer>
 {
     private AudioSource current;
     private AudioSource next;

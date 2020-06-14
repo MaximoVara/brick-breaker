@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,9 +46,24 @@ public class GameManager : MonoBehaviour
     private void OnGameOver()
     {
         Debug.Log("You Won!");
-        PlayerPrefs.SetInt("Level 1", this.score);
-        DataManager.GameData.SetScore("Level 1", new Score(this.score, System.DateTime.Now));
+        #region Score logic...
+        var levelData = LevelDatabase.Instance.GetLevelData(SceneManager.GetActiveScene().name);
+        if (levelData != null)
+        {
+            if (string.IsNullOrEmpty(levelData.NextLevel) == false)
+            {
+                DataManager.GameData.UnlockLevel(levelData.NextLevel);
+            }
+        }
+        #endregion
+
+        #region Unlock Level Logic...
+
+        #endregion
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, this.score);
+        DataManager.GameData.SetScore(SceneManager.GetActiveScene().name, new Score(this.score, System.DateTime.Now));
         DataManager.SaveGameData();
+
 
         var asset = Resources.Load<GameOver>("GameOver");
         GameObject.Instantiate(asset.gameObject);

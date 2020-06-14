@@ -20,9 +20,10 @@ public class UILevelCreation : MonoBehaviour
             var levelData = iterator.Current;
             var clone = Instantiate(this.template.gameObject);
             clone.SetActive(true);
-            clone.transform.localScale = Vector3.one;
 
             clone.transform.SetParent(this.content);
+            clone.transform.localScale = Vector3.one;
+
             var uiLevelData = clone.GetComponent<UILevelData>();
 
             uiLevelData.SetLevelData(levelData);

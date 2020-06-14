@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelDatabase", menuName = "App/Objects/Create Level Database")]
-public class LevelDatabase : ScriptableObject
+public class LevelDatabase : SOSingleton<LevelDatabase>
 {
     [SerializeField]
     private LevelData[] levels = new LevelData[1];
@@ -14,6 +14,18 @@ public class LevelDatabase : ScriptableObject
             return this.levels;
         }
     }
+    public LevelData GetLevelData(string levelName)
+    {
+        for(int i = 0; i < this.levels.Length; ++i)
+        {
+            var level = this.levels[i];
+            if(string.Compare(level.Name, levelName) == 0 )
+            {
+                return level;
+            }
+        }
+        return null;
+    }
     [System.Serializable]
     public class LevelData : System.Object
     {
@@ -21,6 +33,9 @@ public class LevelDatabase : ScriptableObject
         private string name;
         [SerializeField]
         private Sprite icon;
+        [SerializeField]
+        private string nextLevel;
+
         public string Name
         {
             get
@@ -33,6 +48,13 @@ public class LevelDatabase : ScriptableObject
             get
             {
                 return this.icon;
+            }
+        }
+        public string NextLevel
+        {
+            get
+            {
+                return this.nextLevel;
             }
         }
     }

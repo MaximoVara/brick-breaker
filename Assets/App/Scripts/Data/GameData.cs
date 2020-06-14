@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -6,9 +7,43 @@ using System.Runtime.Serialization;
 [DataContract]
 public class GameData : System.Object
 {
+    static readonly string[] LEVELS_UNLOCKED = new string[] { "Level 1" };
+
     [DataMember]
     public Dictionary<string, Score> scores = new Dictionary<string, Score>();
+    [DataMember]
+    private List<string> levelsUnlocked = new List<string>(); // hold the levesl taht are unlocked by the player...
 
+
+    // 
+    public void Validate()
+    {
+        this.ValidateLevels(); // initialize the first level to be unlocked.... or else... how do they play? 
+    }
+    private void ValidateLevels()
+    {
+        for (int i = 0; i < GameData.LEVELS_UNLOCKED.Length; ++i){
+            var level = GameData.LEVELS_UNLOCKED[i];
+            if (this.levelsUnlocked.Contains(level) == false)
+            {
+                this.levelsUnlocked.Add(level);
+            }
+        }
+    }
+    public IReadOnlyList<string> LevelsUnlocked
+    {
+        get {
+            if(this.levelsUnlocked.Contains("Level 1") == false)
+            {
+                this.levelsUnlocked.Add("Level 1");
+            }
+            return this.levelsUnlocked;
+        }
+    }
+    public void UnlockLevel(string levelName)
+    {
+        this.levelsUnlocked.Add(levelName);
+    }
 
     public bool SetScore(string levelName, Score score)
     {

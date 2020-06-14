@@ -25,9 +25,24 @@ public class UILevelData: MonoBehaviour
             this.highScore.text = "Highscore: " + score.Value;
         }
         var button = this.GetComponent<Button>();
-        button.onClick.AddListener(
-            () => {
-                SceneManager.LoadScene(levelData.Name);
-            });
+
+        var iterator = DataManager.GameData.LevelsUnlocked.GetEnumerator();
+        button.interactable = false;
+        while (iterator.MoveNext())
+        {
+            var levelName = iterator.Current;
+
+            if(string.Compare(levelName, levelData.Name) == 0)
+            {
+                button.interactable = true;
+                button.onClick.AddListener(
+                    () => {
+                        SceneManager.LoadScene(levelData.Name);
+                    });
+                break;
+            }
+        }
+        
+        
     }
 }

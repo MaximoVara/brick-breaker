@@ -11,13 +11,13 @@ public class GameOver : MonoBehaviour
     private void Start()
     {
         var gameData = DataManager.GameData;
-        var highscore = gameData.GetScore("Level 1");
+        var highscore = gameData.GetScore(SceneManager.GetActiveScene().name);
         if(highscore != null)
         {
             
             this.best.text = "Best: " + highscore.Value;
         }
-        this.score.text = "Score: " + PlayerPrefs.GetInt("Level 1");
+        this.score.text = "Score: " + PlayerPrefs.GetInt(SceneManager.GetActiveScene().name);
         // this.onRetry.onClick.AddListener(this.OnRetry);
         // this.onQuit.onClick.AddListener(this.OnQuit);
     }
